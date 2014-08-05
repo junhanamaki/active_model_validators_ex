@@ -1,6 +1,6 @@
 # ActiveModelValidatorsEx
 
-TODO: Write a gem description
+A lib of custom validators for ActiveModel.
 
 ## Installation
 
@@ -18,11 +18,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+After requiring the following classes will be available for ActiveModel
+validations:
+
+  * ArrayInclusionValidator
+
+
+
+  * TimeFormatValidator
+
+
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/active_model_validators_ex/fork )
+1. Fork it ( https://github.com/junhanamaki/active_model_validators_ex/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

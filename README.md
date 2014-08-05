@@ -26,50 +26,50 @@ validations:
    Allow you to validate if values in an array is included in a specified range
    (meaning the value itself has to be an Array). As an example:
 
-    class ExampleModel
-      include Mongoid::Document
+      class ExampleModel
+        include Mongoid::Document
 
-      field :array
+        field :array
 
-      validates :array, array_inclusion: {
-          # the collection of valid values for array elements
-          in: [0, 1, 2], # it could also be written as a range: 0..2
+        validates :array, array_inclusion: {
+            # the collection of valid values for array elements
+            in: [0, 1, 2], # it could also be written as a range: 0..2
 
-          # can be either true or false, indicates if nil is accepted
-          # defaults to false
-          allow_nil: true
-        }
-    end
+            # can be either true or false, indicates if nil is accepted
+            # defaults to false
+            allow_nil: true
+          }
+      end
 
-    # returns true
-    ExampleModel.new(array: [1, 2, 1]).valid?
+      # returns true
+      ExampleModel.new(array: [1, 2, 1]).valid?
 
-    # returns false
-    ExampleModel.new(array: [1, 2, 5]).valid?
+      # returns false
+      ExampleModel.new(array: [1, 2, 5]).valid?
 
   * TimeFormatValidator
 
    Allow you to check if given value is parsable to time, example:
 
-    class ExampleModel < ActiveRecord::Base
-      attr_accessible :time
+      class ExampleModel < ActiveRecord::Base
+        attr_accessible :time
 
-      validates :time, time_format: {
-          # value can be either a lambda or a time, and indicates that
-          # attribute value must be after this value
-          after: lambda { Time.new(2014) },
+        validates :time, time_format: {
+            # value can be either a lambda or a time, and indicates that
+            # attribute value must be after this value
+            after: lambda { Time.new(2014) },
 
-          # can be either true or false, indicates if nil is accepted
-          # defaults to false
-          allow_nil: true
-        }
-    end
+            # can be either true or false, indicates if nil is accepted
+            # defaults to false
+            allow_nil: true
+          }
+      end
 
-    # returns true
-    ExampleModel.new(time: Time.new(2015)).valid?
+      # returns true
+      ExampleModel.new(time: Time.new(2015)).valid?
 
-    # returns false
-    ExampleModel.new(time: Time.new(2013)).valid?
+      # returns false
+      ExampleModel.new(time: Time.new(2013)).valid?
 
 ## Contributing
 

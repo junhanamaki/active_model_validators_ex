@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe ArrayInclusionValidator do
+  class RecordMock
+    attr_accessor
+  end
+
   describe '#validate_each' do
     context 'nil value and allow_nil true' do
       before { @instance = TestNilModel.new }

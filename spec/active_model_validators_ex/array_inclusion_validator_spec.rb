@@ -19,7 +19,7 @@ describe ArrayInclusionValidator do
     let(:validator) { ArrayInclusionValidator.new(options) }
     before { validator.validate_each(record, attribute, value) }
 
-    context 'for instance initialized with hash ' \
+    context 'for instance initialized with options hash ' \
             'key :in with empty array as value' do
       let(:options) { { attributes: attribute, in: [] } }
 
@@ -56,7 +56,7 @@ describe ArrayInclusionValidator do
       end
     end
 
-    context 'for instance initialized with options ' \
+    context 'for instance initialized with options hash ' \
             'key :in with empty array as value, ' \
             'allow_nil as false' do
       let(:options) { { attributes: attribute, in: [], allow_nil: false } }
@@ -94,7 +94,7 @@ describe ArrayInclusionValidator do
       end
     end
 
-    context 'for instance initialized with options ' \
+    context 'for instance initialized with options hash ' \
             'key :in with empty array as value, ' \
             'allow_nil as true' do
       let(:options) { { attributes: attribute, in: [], allow_nil: true } }
@@ -132,7 +132,7 @@ describe ArrayInclusionValidator do
       end
     end
 
-    context 'for instance initialized with options ' \
+    context 'for instance initialized with options hash ' \
             'key :in with array with values as value, ' \
             'allow_nil as true' do
       let(:in_array) { [1, 2, 3] }
@@ -179,7 +179,7 @@ describe ArrayInclusionValidator do
       end
     end
 
-    context 'for instance initialized with options ' \
+    context 'for instance initialized with options hash ' \
             'key :in with range with values as value, ' \
             'allow_nil as false' do
       let(:in_range) { 1..3 }

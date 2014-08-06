@@ -1,5 +1,6 @@
 # ActiveModelValidatorsEx
 
+[![build](https://travis-ci.org/junhanamaki/active_model_validators_ex.svg?branch=master)](https://travis-ci.org/junhanamaki/active_model_validators_ex)
 [![Code Climate](https://codeclimate.com/github/junhanamaki/active_model_validators_ex/badges/gpa.svg)](https://codeclimate.com/github/junhanamaki/active_model_validators_ex)
 [![Test Coverage](https://codeclimate.com/github/junhanamaki/active_model_validators_ex/badges/coverage.svg)](https://codeclimate.com/github/junhanamaki/active_model_validators_ex)
 [![Dependency Status](https://gemnasium.com/junhanamaki/active_model_validators_ex.svg)](https://gemnasium.com/junhanamaki/active_model_validators_ex)
@@ -53,7 +54,7 @@ validations:
 
   * TimeFormatValidator
 
-   Allow you to check if given value is parsable to time, example:
+   Allow you to check if given value is parsable to Time, example:
 
         class ExampleModel < ActiveRecord::Base
           attr_accessible :time

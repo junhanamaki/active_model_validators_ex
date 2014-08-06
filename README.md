@@ -1,5 +1,9 @@
 # ActiveModelValidatorsEx
 
+[![Code Climate](https://codeclimate.com/github/junhanamaki/active_model_validators_ex/badges/gpa.svg)](https://codeclimate.com/github/junhanamaki/active_model_validators_ex)
+[![Test Coverage](https://codeclimate.com/github/junhanamaki/active_model_validators_ex/badges/coverage.svg)](https://codeclimate.com/github/junhanamaki/active_model_validators_ex)
+[![Dependency Status](https://gemnasium.com/junhanamaki/active_model_validators_ex.svg)](https://gemnasium.com/junhanamaki/active_model_validators_ex)
+
 A library of validators for ActiveModel.
 
 ## Installation

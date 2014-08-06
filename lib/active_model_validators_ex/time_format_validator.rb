@@ -5,9 +5,10 @@ class TimeFormatValidator < ActiveModel::EachValidator
     parsed_time = value.is_a?(Time) ? value : Time.parse(value.to_s)
 
     previous_time = \
-      if options[:after].is_a?(Proc)
+      case options[:after].class.name
+      when 'Proc'
         options[:after].call
-      elsif options[:after].is_a?(Time)
+      when 'Time'
         options[:after]
       end
 

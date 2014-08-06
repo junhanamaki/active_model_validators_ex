@@ -4,18 +4,19 @@ class TimeFormatValidator < ActiveModel::EachValidator
 
     parsed_time = value.is_a?(Time) ? value : Time.parse(value.to_s)
 
-    previous_time = \
-      case options[:after].class.name
-      when 'Proc'
-        options[:after].call
-      when 'Time'
-        options[:after]
-      end
-
     if !previous_time.nil? and parsed_time < previous_time
       record.errors[attribute] << "invalid value, #{value} must be after #{previous_time}"
     end
   rescue StandardError => e
     record.errors[attribute] << "invalid value, #{value} not valid for #{attribute}"
+  end
+
+  def previous_time
+    case options[:after].class.name
+    when 'Proc'
+      options[:after].call
+    when 'Time'
+      options[:after]
+    end
   end
 end

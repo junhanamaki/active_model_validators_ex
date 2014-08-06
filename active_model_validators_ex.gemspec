@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{Some custom validators for ActiveModel}
   spec.description   = %q{Extend ActiveModel with more validators for your
                           models.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/junhanamaki/active_model_validators_ex"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

@@ -1,5 +1,6 @@
 # ActiveModelValidatorsEx
 
+[![Gem Version](https://badge.fury.io/rb/active_model_validators_ex.svg)](http://badge.fury.io/rb/active_model_validators_ex)
 [![build](https://travis-ci.org/junhanamaki/active_model_validators_ex.svg?branch=master)](https://travis-ci.org/junhanamaki/active_model_validators_ex)
 [![Code Climate](https://codeclimate.com/github/junhanamaki/active_model_validators_ex/badges/gpa.svg)](https://codeclimate.com/github/junhanamaki/active_model_validators_ex)
 [![Test Coverage](https://codeclimate.com/github/junhanamaki/active_model_validators_ex/badges/coverage.svg)](https://codeclimate.com/github/junhanamaki/active_model_validators_ex)

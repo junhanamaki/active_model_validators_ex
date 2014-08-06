@@ -1,6 +1,6 @@
 # ActiveModelValidatorsEx
 
-A lib of custom validators for ActiveModel.
+A library of validators for ActiveModel.
 
 ## Installation
 

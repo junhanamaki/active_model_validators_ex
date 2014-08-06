@@ -1,60 +1,110 @@
 require 'spec_helper'
 
 describe ArrayInclusionValidator do
-  class RecordMock
-    attr_accessor
+  describe '.new' do
+    context 'when key :in is not present in argument hash' do
+      let(:options) { { attributes: :something } }
+
+      it 'raises error' do
+        expect do
+          ArrayInclusionValidator.new(options)
+        end.to raise_error
+      end
+    end
   end
 
   describe '#validate_each' do
-    context 'nil value and allow_nil true' do
-      before { @instance = TestNilModel.new }
+    let(:record)    { MockRecord.new(attribute) }
+    let(:attribute) { :array }
+    let(:validator) { ArrayInclusionValidator.new(options) }
+    before { validator.validate_each(record, attribute, value) }
 
-      it 'instance is valid' do
-        expect(@instance.valid?).to eq(true)
+    context 'for instance initialized with hash ' \
+            'key :in with value empty array' do
+      let(:options) { { attributes: attribute, in: [] } }
+
+      context 'when passed value is nil' do
+        let(:value) { nil }
+
+        it 'sets error message in record, under passed attribute key' do
+          expect(record.errors[attribute].count).to eq(1)
+        end
+      end
+
+      context 'when passed value is an empty array' do
+        let(:value) { [] }
+
+        it 'does not set error messages in record' do
+          expect(record.errors[attribute].count).to eq(0)
+        end
+      end
+
+      context 'when passed value is an array with values' do
+        let(:value) { [1, 2, 3] }
+
+        it 'sets error message in record, under passed attribute key' do
+          expect(record.errors[attribute].count).to eq(1)
+        end
       end
     end
 
-    context 'nil value and allow_nil false' do
-      before { @instance = TestNonNilModel.new }
+    context 'for instance initialized with options ' \
+            'key :in with value empty array, ' \
+            'allow_nil as false' do
+      let(:options) { { attributes: attribute, in: [], allow_nil: false } }
 
-      it 'instance is invalid' do
-        expect(@instance.valid?).to eq(false)
+      context 'when passed value is nil' do
+        let(:value) { nil }
+
+        it 'sets error message in record, under passed attribute key' do
+          expect(record.errors[attribute].count).to eq(1)
+        end
+      end
+
+      context 'when passed value is an empty array' do
+        let(:value) { [] }
+
+        it 'does not set error messages in record' do
+          expect(record.errors[attribute].count).to eq(0)
+        end
+      end
+
+      context 'when passed value is an array with values' do
+        let(:value) { [1, 2, 3] }
+
+        it 'sets error message in record, under passed attribute key' do
+          expect(record.errors[attribute].count).to eq(1)
+        end
       end
     end
 
-    context 'value existing in range' do
-      let(:attributes) { { test: [1] } }
-      before { @instance = TestInRangeModel.new(attributes) }
+    context 'for instance initialized with options ' \
+            'key :in with value empty array, ' \
+            'allow_nil as true' do
+      let(:options) { { attributes: attribute, in: [], allow_nil: true } }
 
-      it 'instance is valid' do
-        expect(@instance.valid?).to eq(true)
+      context 'when passed value is nil' do
+        let(:value) { nil }
+
+        it 'does not set error messages in record' do
+          expect(record.errors[attribute].count).to eq(0)
+        end
       end
-    end
 
-    context 'value does not exist in range' do
-      let(:attributes) { { test: [10] } }
-      before { @instance = TestInRangeModel.new(attributes) }
+      context 'when passed value is an empty array' do
+        let(:value) { [] }
 
-      it 'instance is invalid' do
-        expect(@instance.valid?).to eq(false)
+        it 'does not set error messages in record' do
+          expect(record.errors[attribute].count).to eq(0)
+        end
       end
-    end
 
-    context 'value existing in array' do
-      let(:attributes) { { test: [1] } }
-      before { @instance = TestInArrayModel.new(attributes) }
+      context 'when passed value is an array with values' do
+        let(:value) { [1, 2, 3] }
 
-      it 'instance is valid' do
-        expect(@instance.valid?).to eq(true)
-      end
-    end
-
-    context 'value does not exist in array' do
-      let(:attributes) { { test: [10] } }
-      before { @instance = TestInArrayModel.new(attributes) }
-
-      it 'instance is invalid' do
-        expect(@instance.valid?).to eq(false)
+        it 'sets error message in record, under passed attribute key' do
+          expect(record.errors[attribute].count).to eq(1)
+        end
       end
     end
   end

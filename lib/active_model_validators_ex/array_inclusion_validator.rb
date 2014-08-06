@@ -1,4 +1,14 @@
 class ArrayInclusionValidator < ActiveModel::EachValidator
+  def initialize(options)
+    unless options.key?(:in) &&
+           (options[:in].is_a?(Array) ||
+            options[:in].is_a?(Range))
+      raise 'key :in can not be nil, and value must be either an Array or Range'
+    end
+
+    super(options)
+  end
+
   def validate_each(record, attribute, value)
     return if value.nil? and options[:allow_nil]
 

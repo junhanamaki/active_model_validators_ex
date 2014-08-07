@@ -5,7 +5,7 @@ class ArrayInclusionValidator < ArrayValidatorBase
     unless options.key?(:in) &&
            (options[:in].is_a?(Array) ||
             options[:in].is_a?(Range))
-      raise 'ket in must be present, and value must be either a Range or Array'
+      raise 'key in must be present, and value must be either a Range or Array'
     end
 
     super(options)

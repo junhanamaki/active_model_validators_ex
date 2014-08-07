@@ -1,6 +1,6 @@
 require 'active_model_validators_ex/array_validator_base'
 
-class ArrayInclusionValidator < ArrayValidatorBase
+class ArrayFormatValidator < ArrayValidatorBase
   def initialize(options)
     unless options.key?(:with) && options[:with].is_a?(Regexp)
       raise 'key with must be present, and value must be a Regexp'

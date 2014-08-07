@@ -14,36 +14,6 @@ describe ArrayInclusionValidator do
   end
 
   describe '#validate_each' do
-    shared_examples_for :default do
-      context 'when passed value is a non nil, non array value' do
-        let(:value) { :symbol }
-
-        it 'sets error message in record' do
-          expect(record.errors[attribute].count).to eq(1)
-        end
-      end
-    end
-
-    shared_examples_for :allow_nil_true do
-      context 'when passed value is nil' do
-        let(:value) { nil }
-
-        it 'does not set error messages in record' do
-          expect(record.errors[attribute].count).to eq(0)
-        end
-      end
-    end
-
-    shared_examples_for :allow_nil_false do
-      context 'when passed value is nil' do
-        let(:value) { nil }
-
-        it 'sets error message in record' do
-          expect(record.errors[attribute].count).to eq(1)
-        end
-      end
-    end
-
     let(:record)    { MockRecord.new(attribute) }
     let(:attribute) { :array }
     let(:validator) { ArrayInclusionValidator.new(options) }
@@ -52,9 +22,6 @@ describe ArrayInclusionValidator do
     context 'for instance initialized with options hash ' \
             'in with empty array as value' do
       let(:options) { { attributes: attribute, in: [] } }
-
-      it_behaves_like :default
-      it_behaves_like :allow_nil_false
 
       context 'when passed value is an empty array' do
         let(:value) { [] }
@@ -79,9 +46,6 @@ describe ArrayInclusionValidator do
       context 'and allow_nil as false' do
         let(:options) { { attributes: attribute, in: [], allow_nil: false } }
 
-        it_behaves_like :default
-        it_behaves_like :allow_nil_false
-
         context 'when passed value is an empty array' do
           let(:value) { [] }
 
@@ -101,9 +65,6 @@ describe ArrayInclusionValidator do
 
       context 'and allow_nil as true' do
         let(:options) { { attributes: attribute, in: [], allow_nil: true } }
-
-        it_behaves_like :default
-        it_behaves_like :allow_nil_true
 
         context 'when passed value is an empty array' do
           let(:value) { [] }
@@ -130,9 +91,6 @@ describe ArrayInclusionValidator do
         let(:options) do
           { attributes: attribute, in: in_array, allow_nil: true }
         end
-
-        it_behaves_like :default
-        it_behaves_like :allow_nil_true
 
         context 'when passed value is an empty array' do
           let(:value) { [] }
@@ -164,9 +122,6 @@ describe ArrayInclusionValidator do
         let(:options) do
           { attributes: attribute, in: in_range, allow_nil: false }
         end
-
-        it_behaves_like :default
-        it_behaves_like :allow_nil_false
 
         context 'when passed value is an empty array' do
           let(:value) { [] }

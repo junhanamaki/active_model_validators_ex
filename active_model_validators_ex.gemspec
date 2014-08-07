@@ -8,9 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = ActiveModelValidatorsEx::VERSION
   spec.authors       = ["junhanamaki"]
   spec.email         = ["jun.hanamaki@gmail.com"]
-  spec.summary       = %q{Some custom validators for ActiveModel}
-  spec.description   = %q{Extend ActiveModel with more validators for your
-                          models.}
+  spec.summary       = %q{Custom validators for ActiveModel}
+  spec.description   = %q{Add more validators for your ActiveModel models.}
   spec.homepage      = "https://github.com/junhanamaki/active_model_validators_ex"
   spec.license       = "MIT"
 
@@ -18,6 +17,8 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
+
+  spec.required_ruby_version = '>= 1.9.3'
 
   spec.add_development_dependency 'bundler', '~> 1.6'
   spec.add_development_dependency 'rspec', '~> 3.0'

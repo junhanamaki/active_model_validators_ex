@@ -1,4 +1,11 @@
 class ArrayValidatorBase < ActiveModel::EachValidator
+  def initialize(options)
+    options[:allow_nil]   ||= false
+    options[:allow_empty] ||= false
+
+    super(options)
+  end
+
   def validate_each(record, attribute, value)
     return if options[:allow_nil] && value.nil?
 
@@ -7,7 +14,7 @@ class ArrayValidatorBase < ActiveModel::EachValidator
       return
     end
 
-    if options[:allow_empty] == false and value.empty?
+    if !options[:allow_empty] and value.empty?
       record.errors[attribute] << "attribute #{attribute} can't be empty"
       return
     end

@@ -1,4 +1,6 @@
-class ArrayInclusionValidator < ActiveModel::EachValidator
+require 'active_model_validators_ex/array_validator_base'
+
+class ArrayInclusionValidator < ArrayValidatorBase
   def initialize(options)
     unless options.key?(:in) &&
            (options[:in].is_a?(Array) ||
@@ -9,24 +11,11 @@ class ArrayInclusionValidator < ActiveModel::EachValidator
     super(options)
   end
 
-  def validate_each(record, attribute, value)
-    return if options[:allow_nil] && value.nil?
-
-    unless value.is_a? Array
-      record.errors[attribute] << "attribute #{attribute} must be an Array"
-      return
-    end
-
-    if options[:allow_empty] == false and value.empty?
-      record.errors[attribute] << "attribute #{attribute} can't be empty"
-      return
-    end
-
+  def custom_validations(record, attribute, value)
     unless value.all? { |val| options[:in].include?(val) }
       record.errors[attribute] <<
         "attribute #{attribute} has be an array composed of values " \
         " #{options[:in]}"
-      return
     end
   end
 end

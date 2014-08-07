@@ -20,131 +20,25 @@ describe ArrayInclusionValidator do
     before { validator.validate_each(record, attribute, value) }
 
     context 'for instance initialized with options hash ' \
-            'in with empty array as value' do
-      let(:options) { { attributes: attribute, in: [] } }
+            'and in with an Array of values' do
+      let(:in_array) { [1, 2, 3] }
+      let(:options) do
+        { attributes: attribute, in: in_array }
+      end
 
-      context 'when passed value is an empty array' do
-        let(:value) { [] }
+      context 'when passed value is an array with values that are in options array' do
+        let(:value) { [1, 2, 3] }
 
         it 'does not set error messages in record' do
           expect(record.errors[attribute].count).to eq(0)
         end
       end
 
-      context 'when passed value is an array with values' do
-        let(:value) { [1, 2, 3] }
+      context 'when passed value is an array with values not in options array' do
+        let(:value) { [4, 5, 6] }
 
-        it 'sets error message in record, under passed attribute key' do
+        it 'sets error message in record' do
           expect(record.errors[attribute].count).to eq(1)
-        end
-      end
-
-      context 'and allow_empty as true' do
-
-      end
-
-      context 'and allow_nil as false' do
-        let(:options) { { attributes: attribute, in: [], allow_nil: false } }
-
-        context 'when passed value is an empty array' do
-          let(:value) { [] }
-
-          it 'does not set error messages in record' do
-            expect(record.errors[attribute].count).to eq(0)
-          end
-        end
-
-        context 'when passed value is an array with values' do
-          let(:value) { [1, 2, 3] }
-
-          it 'sets error message in record, under passed attribute key' do
-            expect(record.errors[attribute].count).to eq(1)
-          end
-        end
-      end
-
-      context 'and allow_nil as true' do
-        let(:options) { { attributes: attribute, in: [], allow_nil: true } }
-
-        context 'when passed value is an empty array' do
-          let(:value) { [] }
-
-          it 'does not set error messages in record' do
-            expect(record.errors[attribute].count).to eq(0)
-          end
-        end
-
-        context 'when passed value is an array with values' do
-          let(:value) { [1, 2, 3] }
-
-          it 'sets error message in record, under passed attribute key' do
-            expect(record.errors[attribute].count).to eq(1)
-          end
-        end
-      end
-    end
-
-    context 'for instance initialized with options hash ' \
-            'key :in with array with values as value' do
-      context 'and allow_nil as true' do
-        let(:in_array) { [1, 2, 3] }
-        let(:options) do
-          { attributes: attribute, in: in_array, allow_nil: true }
-        end
-
-        context 'when passed value is an empty array' do
-          let(:value) { [] }
-
-          it 'does not set error messages in record' do
-            expect(record.errors[attribute].count).to eq(0)
-          end
-        end
-
-        context 'when passed value is an array with values that are in options array' do
-          let(:value) { [1, 2, 3] }
-
-          it 'does not set error messages in record' do
-            expect(record.errors[attribute].count).to eq(0)
-          end
-        end
-
-        context 'when passed value is an array with values not in options array' do
-          let(:value) { [4, 5, 6] }
-
-          it 'sets error message in record' do
-            expect(record.errors[attribute].count).to eq(1)
-          end
-        end
-      end
-
-      context 'and allow_nil as false' do
-        let(:in_range) { 1..3 }
-        let(:options) do
-          { attributes: attribute, in: in_range, allow_nil: false }
-        end
-
-        context 'when passed value is an empty array' do
-          let(:value) { [] }
-
-          it 'does not set error messages in record' do
-            expect(record.errors[attribute].count).to eq(0)
-          end
-        end
-
-        context 'when passed value is an array with values that are in options range' do
-          let(:value) { [1, 2, 3] }
-
-          it 'does not set error messages in record' do
-            expect(record.errors[attribute].count).to eq(0)
-          end
-        end
-
-        context 'when passed value is an array with values not in options range' do
-          let(:value) { [4, 5, 6] }
-
-          it 'sets error message in record' do
-            expect(record.errors[attribute].count).to eq(1)
-          end
         end
       end
     end

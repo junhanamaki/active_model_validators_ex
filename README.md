@@ -45,8 +45,8 @@ validations:
               # defaults to false
               allow_nil: true,
 
-              # can be either true or false, indicates if it accepts empty
-              # arrays. default to true
+              # can be either true or false, indicates if it accepts empty arrays
+              # defaults to false
               allow_empty: true
             }
         end

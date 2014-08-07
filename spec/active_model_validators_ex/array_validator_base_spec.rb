@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ArrayValidatorBase, t: true do
+describe ArrayValidatorBase do
   shared_examples_for :common_behavior do
     context 'and value is a non nil, non array value' do
       let(:value) { :symbol }

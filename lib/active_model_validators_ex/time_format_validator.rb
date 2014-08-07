@@ -1,4 +1,10 @@
 class TimeFormatValidator < ActiveModel::EachValidator
+  def initialize(options)
+    options[:allow_nil] ||= false
+
+    super(options)
+  end
+
   def validate_each(record, attribute, value)
     return if options[:allow_nil] && value.nil?
 

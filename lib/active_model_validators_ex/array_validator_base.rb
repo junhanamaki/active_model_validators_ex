@@ -16,6 +16,8 @@ class ArrayValidatorBase < ActiveModel::EachValidator
   end
 
   def custom_validations(record, attribute, value)
-    raise 'override this method to perform custom validations'
+    unless self.instance_of? ArrayValidatorBase
+      raise 'override this method to perform custom validations'
+    end
   end
 end

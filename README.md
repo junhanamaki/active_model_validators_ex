@@ -97,7 +97,7 @@ validations:
           validates :time, time_format: {
               # value can be either a lambda or a time, and indicates that
               # attribute value must be after this value
-              after: lambda { Time.new(2014) },
+              after: lambda { |model| Time.new(2014) },
 
               # can be either true or false, indicates if nil is accepted
               # defaults to false

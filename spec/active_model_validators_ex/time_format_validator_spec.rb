@@ -103,7 +103,7 @@ describe TimeFormatValidator do
       end
 
       context 'and after is a Proc that returns Time' do
-        let(:after) { lambda { Time.now } }
+        let(:after) { lambda { |a| Time.now } }
         let(:options) do
           { attributes: attribute, allow_nil: false, after: after }
         end
@@ -186,7 +186,7 @@ describe TimeFormatValidator do
       end
 
       context 'and after is a Proc that returns Time' do
-        let(:after) { lambda { Time.now } }
+        let(:after) { lambda { |a| Time.now } }
         let(:options) do
           { attributes: attribute, allow_nil: true, after: after }
         end

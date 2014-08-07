@@ -70,6 +70,27 @@ describe ArrayValidatorBase do
 
       it_behaves_like :common_behavior
       it_behaves_like :allow_nil_false
+      it_behaves_like :allow_empty_true
+
+      context 'and allow_empty true' do
+        let(:options) do
+          { attributes: attribute, allow_nil: false, allow_empty: true }
+        end
+
+        it_behaves_like :common_behavior
+        it_behaves_like :allow_nil_false
+        it_behaves_like :allow_empty_true
+      end
+
+      context 'and allow_empty false' do
+        let(:options) do
+          { attributes: attribute, allow_nil: false, allow_empty: false }
+        end
+
+        it_behaves_like :common_behavior
+        it_behaves_like :allow_nil_false
+        it_behaves_like :allow_empty_false
+      end
     end
 
     context 'for instance initialized with allow_nil as true' do
@@ -77,6 +98,27 @@ describe ArrayValidatorBase do
 
       it_behaves_like :common_behavior
       it_behaves_like :allow_nil_true
+      it_behaves_like :allow_empty_true
+
+      context 'and allow_empty true' do
+        let(:options) do
+          { attributes: attribute, allow_nil: true, allow_empty: true }
+        end
+
+        it_behaves_like :common_behavior
+        it_behaves_like :allow_nil_true
+        it_behaves_like :allow_empty_true
+      end
+
+      context 'and allow_empty false' do
+        let(:options) do
+          { attributes: attribute, allow_nil: true, allow_empty: false }
+        end
+
+        it_behaves_like :common_behavior
+        it_behaves_like :allow_nil_true
+        it_behaves_like :allow_empty_false
+      end
     end
   end
 end

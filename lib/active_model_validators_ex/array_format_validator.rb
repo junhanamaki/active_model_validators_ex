@@ -1,9 +1,7 @@
 class ArrayInclusionValidator < ActiveModel::EachValidator
   def initialize(options)
-    unless options.key?(:in) &&
-           (options[:in].is_a?(Array) ||
-            options[:in].is_a?(Range))
-      raise 'ket in must be present, and value must be either a Range or Array'
+    unless options.key?(:with) && options[:with].is_a?(Regexp)
+      raise 'key with must be present, and value must be a Regexp'
     end
 
     super(options)
@@ -22,10 +20,9 @@ class ArrayInclusionValidator < ActiveModel::EachValidator
       return
     end
 
-    unless value.all? { |val| options[:in].include?(val) }
+    unless value.all? { |val| val.match(options[:with]) }
       record.errors[attribute] <<
-        "attribute #{attribute} has be an array composed of values " \
-        " #{options[:in]}"
+        "attribute #{attribute} has be an array that matches #{options[:with]}"
       return
     end
   end

@@ -29,8 +29,8 @@ validations:
 
   * ArrayInclusionValidator
 
-   Allow you to validate if values in an array is included in a specified range
-   (meaning the value itself has to be an Array). As an example:
+   Validates if attribute value is an Array, containing values defined under key
+   :in (this can be defined either with an Array or Range). As an example:
 
         class ExampleModel
           include Mongoid::Document
@@ -39,11 +39,15 @@ validations:
 
           validates :array, array_inclusion: {
               # the collection of valid values for array elements
-              in: [0, 1, 2], # it could also be written as a range: 0..2
+              in: [0, 1, 2], # this could also be written as a range: 0..2
 
               # can be either true or false, indicates if nil is accepted
               # defaults to false
-              allow_nil: true
+              allow_nil: true,
+
+              # can be either true or false, indicates if it accepts empty
+              # arrays. default to true
+              allow_empty: true
             }
         end
 
@@ -53,9 +57,16 @@ validations:
         # returns false
         ExampleModel.new(array: [1, 2, 5]).valid?
 
+        # returns true
+        ExampleModel.new(array: []).valid?
+
+  * ArrayFormatValidator
+
+
+
   * TimeFormatValidator
 
-   Allow you to check if given value is parsable to Time, example:
+   Validates if value is of type Time or a string parsable to Time, example:
 
         class ExampleModel < ActiveRecord::Base
           attr_accessible :time

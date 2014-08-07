@@ -38,7 +38,7 @@ validations:
           field :array
 
           validates :array, array_inclusion: {
-              # the collection of valid values for array elements
+              # the collection of values to compare with each element in array
               in: [0, 1, 2], # this could also be written as a range: 0..2
 
               # can be either true or false, indicates if nil is accepted
@@ -62,7 +62,30 @@ validations:
 
   * ArrayFormatValidator
 
+        class ExampleModel
+          include Mongoid::Document
 
+          field :array
+
+          validates :array, array_format: {
+            # the regexp to compare each element in array
+            with: /(some|match|string)/
+
+            # can be either true or false, indicates if nil is accepted
+            # defaults to false
+            allow_nil: true,
+
+            # can be either true or false, indicates if it accepts empty arrays
+            # defaults to false
+            allow_empty: true
+          }
+        end
+
+        # returns true
+        ExampleModel.new(array: ['some', 'match', 'string']).valid?
+
+        # return false
+        ExampleModel.new(array: ['not', 'matching']).valid?
 
   * TimeFormatValidator
 

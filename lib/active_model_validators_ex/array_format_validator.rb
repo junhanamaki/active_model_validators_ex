@@ -1,4 +1,6 @@
-class ArrayInclusionValidator < ActiveModel::EachValidator
+require 'active_model_validators_ex/array_validator_base'
+
+class ArrayInclusionValidator < ArrayValidatorBase
   def initialize(options)
     unless options.key?(:with) && options[:with].is_a?(Regexp)
       raise 'key with must be present, and value must be a Regexp'
@@ -7,23 +9,11 @@ class ArrayInclusionValidator < ActiveModel::EachValidator
     super(options)
   end
 
-  def validate_each(record, attribute, value)
-    return if options[:allow_nil] && value.nil?
-
-    unless value.is_a? Array
-      record.errors[attribute] << "attribute #{attribute} must be an Array"
-      return
-    end
-
-    if options[:allow_empty] == false and value.empty?
-      record.errors[attribute] << "attribute #{attribute} can't be empty"
-      return
-    end
-
-    unless value.all? { |val| val.match(options[:with]) }
+  def custom_validations(record, attribute, value)
+    unless value.all? { |val| !val.match(options[:with]).nil? }
       record.errors[attribute] <<
-        "attribute #{attribute} has be an array that matches #{options[:with]}"
-      return
+        "attribute #{attribute} must be an Array with values that matches " \
+        "#{options[:with]}"
     end
   end
 end

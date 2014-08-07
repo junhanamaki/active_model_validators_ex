@@ -14,27 +14,6 @@ describe ArrayInclusionValidator do
   end
 
   describe '#validate_each' do
-    shared_examples_for :default_options_with_in_key_empty do
-      it_behaves_like :default
-      it_behaves_like :allow_nil_false
-
-      context 'when passed value is an empty array' do
-        let(:value) { [] }
-
-        it 'does not set error messages in record' do
-          expect(record.errors[attribute].count).to eq(0)
-        end
-      end
-
-      context 'when passed value is an array with values' do
-        let(:value) { [1, 2, 3] }
-
-        it 'sets error message in record, under passed attribute key' do
-          expect(record.errors[attribute].count).to eq(1)
-        end
-      end
-    end
-
     shared_examples_for :default do
       context 'when passed value is a non nil, non array value' do
         let(:value) { :symbol }
@@ -74,14 +53,50 @@ describe ArrayInclusionValidator do
             'in with empty array as value' do
       let(:options) { { attributes: attribute, in: [] } }
 
-      it_behaves_like :default_options_with_in_key_empty
+      it_behaves_like :default
+      it_behaves_like :allow_nil_false
+
+      context 'when passed value is an empty array' do
+        let(:value) { [] }
+
+        it 'does not set error messages in record' do
+          expect(record.errors[attribute].count).to eq(0)
+        end
+      end
+
+      context 'when passed value is an array with values' do
+        let(:value) { [1, 2, 3] }
+
+        it 'sets error message in record, under passed attribute key' do
+          expect(record.errors[attribute].count).to eq(1)
+        end
+      end
 
       context 'and allow_empty as true' do
 
       end
 
       context 'and allow_nil as false' do
-        it_behaves_like :default_options_with_in_key_empty
+        let(:options) { { attributes: attribute, in: [], allow_nil: false } }
+
+        it_behaves_like :default
+        it_behaves_like :allow_nil_false
+
+        context 'when passed value is an empty array' do
+          let(:value) { [] }
+
+          it 'does not set error messages in record' do
+            expect(record.errors[attribute].count).to eq(0)
+          end
+        end
+
+        context 'when passed value is an array with values' do
+          let(:value) { [1, 2, 3] }
+
+          it 'sets error message in record, under passed attribute key' do
+            expect(record.errors[attribute].count).to eq(1)
+          end
+        end
       end
 
       context 'and allow_nil as true' do

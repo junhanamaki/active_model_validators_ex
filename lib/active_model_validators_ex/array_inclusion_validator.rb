@@ -15,7 +15,7 @@ class ArrayInclusionValidator < ArrayValidatorBase
     unless value.all? { |val| options[:in].include?(val) }
       record.errors[attribute] <<
         "attribute #{attribute} has be an array composed of values " \
-        " #{options[:in]}"
+        "#{options[:in]}"
     end
   end
 end

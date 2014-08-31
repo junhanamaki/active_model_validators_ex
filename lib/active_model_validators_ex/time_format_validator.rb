@@ -1,5 +1,12 @@
 class TimeFormatValidator < ActiveModel::EachValidator
   def initialize(options)
+    unless options[:after].is_a?(NilClass) or
+           options[:after].is_a?(Proc)     or
+           options[:after].is_a?(Time)
+      raise ArgumentError,
+            'value after must be either NilClass, Proc or Time'
+    end
+
     options[:allow_nil] ||= false
 
     super(options)
@@ -13,10 +20,13 @@ class TimeFormatValidator < ActiveModel::EachValidator
     previous_time = calculate_previous_time(record)
 
     if !previous_time.nil? and parsed_time < previous_time
-      record.errors[attribute] << "invalid value, #{value} must be after #{previous_time}"
+      options[:value]         = value
+      options[:previous_time] = previous_time
+
+      record.errors.add(attribute, :time_greater_than, options)
     end
   rescue StandardError => e
-    record.errors[attribute] << "invalid value, #{value} not valid for #{attribute}"
+    record.errors.add(attribute, :time_invalid, options)
   end
 
   def calculate_previous_time(record)

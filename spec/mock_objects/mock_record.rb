@@ -1,7 +1,8 @@
-class MockRecord
-  attr_accessor :errors
+require 'mongoid'
 
-  def initialize(attribute)
-    @errors = { attribute => [] }
-  end
+class MockRecord
+  include Mongoid::Document
+
+  field :array
+  field :time
 end

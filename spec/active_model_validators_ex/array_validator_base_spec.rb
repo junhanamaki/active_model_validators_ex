@@ -12,8 +12,8 @@ describe ArrayValidatorBase do
   end
 
   describe '.validate_each' do
-    let(:record)    { MockRecord.new(attribute) }
-    let(:attribute) { :a }
+    let(:record)    { MockRecord.new }
+    let(:attribute) { :array }
     let(:validator) { ArrayValidatorBase.new(options) }
     before do
       validator.validate_each(record, attribute, value) rescue nil

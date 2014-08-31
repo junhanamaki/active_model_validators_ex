@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe TimeFormatValidator do
   describe '#validate_each' do
-    let(:record)    { MockRecord.new(attribute) }
+    let(:record)    { MockRecord.new }
     let(:attribute) { :time }
     let(:validator) { TimeFormatValidator.new(options) }
     before { validator.validate_each(record, attribute, value) }

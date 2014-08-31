@@ -14,7 +14,7 @@ describe ArrayInclusionValidator do
   end
 
   describe '#validate_each' do
-    let(:record)    { MockRecord.new(attribute) }
+    let(:record)    { MockRecord.new }
     let(:attribute) { :array }
     let(:validator) { ArrayInclusionValidator.new(options) }
     before { validator.validate_each(record, attribute, value) }

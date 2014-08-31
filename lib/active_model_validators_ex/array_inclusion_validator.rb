@@ -2,10 +2,9 @@ require 'active_model_validators_ex/array_validator_base'
 
 class ArrayInclusionValidator < ArrayValidatorBase
   def initialize(options)
-    unless options.key?(:in) &&
-           (options[:in].is_a?(Array) ||
-            options[:in].is_a?(Range))
-      raise 'key in must be present, and value must be either a Range or Array'
+    unless options[:in].is_a?(Array) or options[:in].is_a?(Range)
+      raise ArgumentError,
+            'value for in must be either a Range or Array'
     end
 
     super(options)
@@ -13,9 +12,7 @@ class ArrayInclusionValidator < ArrayValidatorBase
 
   def custom_validations(record, attribute, value)
     unless value.all? { |val| options[:in].include?(val) }
-      record.errors[attribute] <<
-        "attribute #{attribute} has be an array composed of values " \
-        "#{options[:in]}"
+      record.errors.add(attribute, :array_inclusion, options)
     end
   end
 end

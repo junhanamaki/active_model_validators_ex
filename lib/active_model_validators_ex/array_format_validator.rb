@@ -2,8 +2,8 @@ require 'active_model_validators_ex/array_validator_base'
 
 class ArrayFormatValidator < ArrayValidatorBase
   def initialize(options)
-    unless options.key?(:with) && options[:with].is_a?(Regexp)
-      raise 'key with must be present, and value must be a Regexp'
+    unless options.key?(:with) and options[:with].is_a?(Regexp)
+      raise 'options must contain a key :with, where the value is a Regexp'
     end
 
     super(options)
@@ -11,9 +11,7 @@ class ArrayFormatValidator < ArrayValidatorBase
 
   def custom_validations(record, attribute, value)
     unless value.all? { |val| !val.match(options[:with]).nil? }
-      record.errors[attribute] <<
-        "attribute #{attribute} must be an Array with values that matches " \
-        "#{options[:with]}"
+      record.errors.add(attribute, :array_format, options)
     end
   end
 end

@@ -10,12 +10,12 @@ class ArrayValidatorBase < ActiveModel::EachValidator
     return if options[:allow_nil] && value.nil?
 
     unless value.is_a? Array
-      record.errors[attribute] << "attribute #{attribute} must be an Array"
+      record.errors.add(attribute, :array, options)
       return
     end
 
     if !options[:allow_empty] and value.empty?
-      record.errors[attribute] << "attribute #{attribute} can't be empty"
+      record.errors.add(attribute, :empty, options)
       return
     end
 

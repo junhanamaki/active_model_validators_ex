@@ -12,3 +12,5 @@ require 'pry'
 require 'active_model'
 require 'active_model_validators_ex'
 require 'mock_objects/mock_record'
+
+I18n::load_path = Dir[File.join('./spec/locales', '*.yml')]

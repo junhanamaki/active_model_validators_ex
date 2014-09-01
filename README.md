@@ -25,7 +25,8 @@ Or install it yourself as:
 ## Localization
 
 Translations are supported by [I18n](https://github.com/svenfuchs/i18n) and follows
-the established convention. Translations are available in the folder config/locales,
+the established convention. Translations are available in the folder
+[config/locales](https://github.com/junhanamaki/active_model_validators_ex/tree/master/config/locales),
 so just copy them to your project and edit as needed.
 
 ## Usage

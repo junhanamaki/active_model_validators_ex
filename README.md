@@ -22,6 +22,12 @@ Or install it yourself as:
 
     $ gem install active_model_validators_ex
 
+## Localization
+
+Translations are supported by [I18n](https://github.com/svenfuchs/i18n) and follows
+the established convention. Translations are available in the folder config/locales,
+so just copy them to your project and edit as needed.
+
 ## Usage
 
 After requiring, the following classes will be available for ActiveModel
@@ -60,6 +66,8 @@ validations:
         # returns true
         ExampleModel.new(array: []).valid?
 
+   Used translation keys: array, empty, array_inclusion
+
   * ArrayFormatValidator
 
         class ExampleModel
@@ -87,6 +95,8 @@ validations:
         # return false
         ExampleModel.new(array: ['not', 'matching']).valid?
 
+   Used translation keys: array, empty, array_format
+
   * TimeFormatValidator
 
    Validates if value is of type Time or a string parsable to Time, example:
@@ -110,6 +120,8 @@ validations:
 
         # returns false
         ExampleModel.new(time: Time.new(2013)).valid?
+
+   Used translation keys: time_greater_than, time_invalid
 
 ## Contributing
 

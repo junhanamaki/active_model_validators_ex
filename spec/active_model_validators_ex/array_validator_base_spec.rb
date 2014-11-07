@@ -20,7 +20,7 @@ describe ArrayValidatorBase do
     end
 
     shared_examples_for :common_behavior do
-      context 'and value is a non nil, non array value' do
+      context 'value is a non nil, non array value' do
         let(:value) { :symbol }
 
         it 'sets error message in record' do
@@ -30,7 +30,7 @@ describe ArrayValidatorBase do
     end
 
     shared_examples_for :allow_nil_true do
-      context 'and value is nil' do
+      context 'value is nil' do
         let(:value) { nil }
 
         it 'does not set error messages in record' do
@@ -40,7 +40,7 @@ describe ArrayValidatorBase do
     end
 
     shared_examples_for :allow_nil_false do
-      context 'and value is nil' do
+      context 'value is nil' do
         let(:value) { nil }
 
         it 'sets error message in record' do
@@ -49,8 +49,8 @@ describe ArrayValidatorBase do
       end
     end
 
-    shared_examples_for :allow_empty_true do
-      context 'and value is an empty Array' do
+    shared_examples_for :allow_blank_true do
+      context 'value is an blank Array' do
         let(:value) { [] }
 
         it 'does not set error messages in record' do
@@ -59,8 +59,8 @@ describe ArrayValidatorBase do
       end
     end
 
-    shared_examples_for :allow_empty_false do
-      context 'and value is an empty Array' do
+    shared_examples_for :allow_blank_false do
+      context 'value is an blank Array' do
         let(:value) { [] }
 
         it 'set error messager in record' do
@@ -74,23 +74,22 @@ describe ArrayValidatorBase do
 
       it_behaves_like :common_behavior
       it_behaves_like :allow_nil_false
-      it_behaves_like :allow_empty_false
+      it_behaves_like :allow_blank_false
     end
 
-    context 'for instance initialized with allow_empty true' do
-      let(:options) { { attributes: attribute, allow_empty: true } }
+    context 'for instance initialized with allow_blank true' do
+      let(:options) { { attributes: attribute, allow_blank: true } }
 
       it_behaves_like :common_behavior
-      it_behaves_like :allow_nil_false
-      it_behaves_like :allow_empty_true
+      it_behaves_like :allow_blank_true
     end
 
-    context 'for instance initialized with allow_empty false' do
-      let(:options) { { attributes: attribute, allow_empty: false } }
+    context 'for instance initialized with allow_blank false' do
+      let(:options) { { attributes: attribute, allow_blank: false } }
 
       it_behaves_like :common_behavior
+      it_behaves_like :allow_blank_false
       it_behaves_like :allow_nil_false
-      it_behaves_like :allow_empty_false
     end
 
     context 'for instance initialized with allow_nil true' do
@@ -98,26 +97,26 @@ describe ArrayValidatorBase do
 
       it_behaves_like :common_behavior
       it_behaves_like :allow_nil_true
-      it_behaves_like :allow_empty_false
+      it_behaves_like :allow_blank_false
 
-      context 'and allow_empty true' do
+      context 'and allow_blank true' do
         let(:options) do
-          { attributes: attribute, allow_nil: true, allow_empty: true }
+          { attributes: attribute, allow_nil: true, allow_blank: true }
         end
 
         it_behaves_like :common_behavior
         it_behaves_like :allow_nil_true
-        it_behaves_like :allow_empty_true
+        it_behaves_like :allow_blank_true
       end
 
-      context 'and allow_empty false' do
+      context 'and allow_blank false' do
         let(:options) do
-          { attributes: attribute, allow_nil: true, allow_empty: false }
+          { attributes: attribute, allow_nil: true, allow_blank: false }
         end
 
         it_behaves_like :common_behavior
         it_behaves_like :allow_nil_true
-        it_behaves_like :allow_empty_false
+        it_behaves_like :allow_blank_false
       end
     end
 
@@ -126,26 +125,25 @@ describe ArrayValidatorBase do
 
       it_behaves_like :common_behavior
       it_behaves_like :allow_nil_false
-      it_behaves_like :allow_empty_false
+      it_behaves_like :allow_blank_false
 
-      context 'and allow_empty true' do
+      context 'and allow_blank true' do
         let(:options) do
-          { attributes: attribute, allow_nil: false, allow_empty: true }
+          { attributes: attribute, allow_nil: false, allow_blank: true }
         end
 
         it_behaves_like :common_behavior
-        it_behaves_like :allow_nil_false
-        it_behaves_like :allow_empty_true
+        it_behaves_like :allow_blank_true
       end
 
-      context 'and allow_empty false' do
+      context 'and allow_blank false' do
         let(:options) do
-          { attributes: attribute, allow_nil: false, allow_empty: false }
+          { attributes: attribute, allow_nil: false, allow_blank: false }
         end
 
         it_behaves_like :common_behavior
         it_behaves_like :allow_nil_false
-        it_behaves_like :allow_empty_false
+        it_behaves_like :allow_blank_false
       end
     end
   end

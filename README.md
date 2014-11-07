@@ -52,9 +52,9 @@ validations:
               # defaults to false
               allow_nil: true,
 
-              # can be either true or false, indicates if it accepts empty arrays
+              # can be either true or false, indicates if it accepts blank value
               # defaults to false
-              allow_empty: true
+              allow_blank: true
             }
         end
 
@@ -67,7 +67,7 @@ validations:
         # returns true
         ExampleModel.new(array: []).valid?
 
-   Used translation keys: array, empty, array_inclusion
+   Used translation keys: array, blank, array_inclusion
 
   * ArrayFormatValidator
 
@@ -84,9 +84,9 @@ validations:
             # defaults to false
             allow_nil: true,
 
-            # can be either true or false, indicates if it accepts empty arrays
+            # can be either true or false, indicates if it accepts blank value
             # defaults to false
-            allow_empty: true
+            allow_blank: true
           }
         end
 
@@ -96,7 +96,7 @@ validations:
         # return false
         ExampleModel.new(array: ['not', 'matching']).valid?
 
-   Used translation keys: array, empty, array_format
+   Used translation keys: array, blank, array_format
 
   * TimeFormatValidator
 

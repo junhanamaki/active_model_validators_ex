@@ -8,7 +8,6 @@ else
   CodeClimate::TestReporter.start
 end
 
-require 'pry'
 require 'active_model'
 require 'active_model_validators_ex'
 require 'mock_objects/mock_record'

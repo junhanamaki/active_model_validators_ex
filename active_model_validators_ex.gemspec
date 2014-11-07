@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'simplecov', '~> 0.9'
   spec.add_development_dependency 'codeclimate-test-reporter', '~> 0.4'
-  spec.add_development_dependency 'jazz_hands', '~> 0.5'
+  # spec.add_development_dependency 'jazz_hands', '~> 0.5'
   spec.add_development_dependency 'activemodel', '~> 4.1'
   spec.add_development_dependency 'mongoid', '~> 4.0'
 end
